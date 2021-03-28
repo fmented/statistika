@@ -1,46 +1,42 @@
 <template>
   <div>
-      <div  class="formula">
+      <div  class="formula accent">
           <h3>Sorted</h3>
           <div class="table-container">
           <table class="table">
               <tbody>
                   <tr v-for="(v, i) in sortedList" :key="i">
-                      <td v-for="(v2, j) in v" :key="j" style="border:1px solid #dddd">
-                          {{v2}}
+                      <td v-for="(v2, j) in v" :key="j" style="border:1px solid #dddd"
+                      v-html="result.medianIndex.includes(breakPoint*i+j) ? `<b>${v2}</b>` : v2 "
+                      >
                       </td>
                   </tr>
               </tbody>
           </table>
           </div>
           </div>
-      <div :key="result.avgDisplay">
-          <h3>Average</h3>
-          <p>{{result.avgDisplay}}</p>
-          <p>`={{result.avg}}`</p>
-      </div>
-      <div  class="formula" :key="result.medianDisplay">
-          <h3>Median</h3>
-          <div v-if="result.medianDisplay != ''">
-              <p >{{result.medianDisplay}}</p>
-          </div>
-          <p>`= {{result.median}}`</p>
-      </div>
-      <div :key="`${result.mode}`">
-          <h3>Mode</h3>
-          <p>` = {{result.mode.toString()}}`</p>
-      </div>
+      <formula :display="result.display.avg" :title="'Average'"/>
+      <formula :display="result.display.median" :title="'Median'" accent/>
+      <formula :display="result.display.mode" :title="'Mode'">
+          <p>` = {{result.mode.length ? result.mode.toString() : 'No Mode'}}`</p>
+      </formula>
   </div>
 </template>
 
 <script>
 import calc from '../scripts/nonGroup'
-import {test} from '../scripts/withGroup.js'
+import Formula from './Formula.vue'
 export default {
+  components: { Formula },
     props:{
         input:{
             type:Array,
-            default:()=>test
+        }
+    },
+
+    data(){
+        return {
+            breakPoint : 12
         }
     },
 
@@ -48,7 +44,7 @@ export default {
         sortedList(){
             let i = [...this.result.sorted]
             let x = []
-            while (i.length) x.push(i.splice(0,8))
+            while (i.length) x.push(i.splice(0,this.breakPoint))
             return x
         },
 
@@ -59,6 +55,10 @@ export default {
 
         
     },
+
+    methods:{
+
+    }
     
 
     

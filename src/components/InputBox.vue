@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
       <h3>Input Data</h3>
       <p v-if="error">Please Check Your Data Again</p>
       <div class="input">
@@ -15,11 +15,12 @@
 </template>
 
 <script>
+import test from '../scripts/example'
 export default {
     data(){
 
         return {
-            inputValue:'',
+            inputValue:test().toString(),
             error: false,
             addition: 0
         }
@@ -68,6 +69,10 @@ export default {
             return this.process(cleanedVal)
 
         }
+    },
+    mounted(){
+        let self = this
+        this.$nextTick(()=>self.check())
     }
 
 }

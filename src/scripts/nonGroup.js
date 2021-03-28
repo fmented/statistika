@@ -21,15 +21,26 @@ function getMode(arr){
 export default function (arr) {
     if (arr.length == 0) return
     
-    let sorted = arr.sort((a,b)=>{
+    let sorted = [...arr].sort((a,b)=>{
         return a > b ? 1:-1
     })
-    let sum = sorted.reduce((total, n)=>total+n)
-    let avg = (sum/sorted.length).toFixed(2)
-    let median = sorted.length%2==1 ? sorted[Math.ceil(sorted.length/2)-1]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2
-    let avgDisplay = '`= frac{'+sum+'}{'+sorted.length+'}`'
-    let medianDisplay = sorted.length%2==0 ? '`= frac{'+sorted[sorted.length/2-1]+'+'+sorted[sorted.length/2]+'}{2}`' : ''
-    let mode = getMode(sorted)
 
-    return {sorted, avg, median, mode, medianDisplay, sum, avgDisplay, unsorted:arr}
+
+    let sum = sorted.reduce((total, n)=>total+n)
+
+    let avg = (sum/sorted.length).toFixed(2)
+
+    let median = sorted.length%2==1 ? sorted[Math.ceil(sorted.length/2)-1]:(sorted[sorted.length/2-1]+sorted[sorted.length/2])/2
+    let avgDisplay = ['Averag\\e = frac{sum value}{sum item}','= frac{'+sum+'}{'+sorted.length+'}', `= ${avg}`]
+    let medianDisplay = sorted.length%2==0 ? ['Median = "Middle point of sorted data"','= frac{'+sorted[sorted.length/2-1]+'+'+sorted[sorted.length/2]+'}{2}', `= ${median}`] : [`= ${median}`]
+    let mode = getMode(sorted)
+    let medianIndex = sorted.length%2==0 ? [sorted.length/2-1, sorted.length/2] : [Math.ceil(sorted.length/2)-1]
+    let display={
+        median: medianDisplay,
+        avg: avgDisplay,
+        mode: ['Mode = "Most Frequent value"']
+    }
+
+
+    return {sorted, avg, median, mode, sum, display, medianIndex}
 }

@@ -14,16 +14,12 @@
     <div v-if="input">
       <p style="text-align:center">Original: {{input.original}}</p>
       <p style="text-align:center">Added: {{input.addedVal}}</p>
-      </div>
-    
-    <div v-if="nongroup">
-        <processor-non-group  v-if="input" :input="input.added"/>
-        <processor-non-group v-else ></processor-non-group>
+
+      <processor-non-group  v-if="nongroup" :input="input.added"/>
+      <processor  v-else :input="input.added"/>
     </div>
-    <div v-else>
-      <processor  v-if="input" :input="input.added"/>
-      <processor  v-else ></processor>
-    </div> 
+    
+    
   </div>
 </template>
 
@@ -110,4 +106,19 @@ p, h3{
 h3{
   margin-top: 5%;
 }
+
+.formula{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color: #ffff;
+
+}
+
+.accent{
+      background-color: rgba(0, 0, 0, .05);
+
+}
+
+
+
 </style>
