@@ -6,7 +6,7 @@ export default {
   props: ['chartdata', 'options'],
   computed:{
       highest(){
-          return Math.max(...this.chartdata.map(i=>i.fi)) + Math.min(...this.chartdata.map(i=>i.fi))
+          return this.chartdata ? Math.max(...this.chartdata.map(i=>i.fi)) + Math.min(...this.chartdata.map(i=>i.fi)) :[]
       },
 
   },

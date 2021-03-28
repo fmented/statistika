@@ -8,7 +8,6 @@
         <label for="addition" class="addition-label">Add by</label>
         <input type="number" name="addition" id="addition" v-model="addition" placeholder="each items added by">
         <slot></slot>
-        <button type="button" @click="check">Process</button>
       </div>
       
   </div>
@@ -54,7 +53,6 @@ export default {
                 try {
                     n = parseFloat(arr[i])
                     if(Number.isNaN(n)) continue
-                    cleanedVal.addedVal.push(n+add)
                     cleanedVal.added.push(n+add)
                     cleanedVal.original.push(n)
                 } 
@@ -73,6 +71,14 @@ export default {
     mounted(){
         let self = this
         this.$nextTick(()=>self.check())
+    },
+    watch:{
+        inputValue(){
+            this.check()
+        },
+        addition(){
+            this.check()
+        }
     }
 
 }
@@ -103,15 +109,6 @@ textarea{
     display: none;
 }
 
-button{
-    margin-top:5%;
-    border-radius: 4px;
-    background-color: #17ff;
-    color: #ffff;
-    border: 1px solid #ddd;
-    font-size: 1.2em;
-
-}
 
 #addition{
     margin: 12px;

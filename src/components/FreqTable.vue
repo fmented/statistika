@@ -1,5 +1,5 @@
 <template>
-<div class="base">
+<div>
     <h3>Frequency Table</h3>
     <div class="table-container">
   <table class="table">

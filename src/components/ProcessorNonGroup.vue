@@ -1,20 +1,6 @@
 <template>
-  <div>
-      <div  class="formula accent">
-          <h3>Sorted</h3>
-          <div class="table-container">
-          <table class="table">
-              <tbody>
-                  <tr v-for="(v, i) in sortedList" :key="i">
-                      <td v-for="(v2, j) in v" :key="j" style="border:1px solid #dddd"
-                      v-html="result.medianIndex.includes(breakPoint*i+j) ? `<b>${v2}</b>` : v2 "
-                      >
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-          </div>
-          </div>
+  <div v-if="result">
+      <auto-table :data="sorted" :boldIndex="boldIndex" :title="'Sorted'" accent/>
       <formula :display="result.display.avg" :title="'Average'"/>
       <formula :display="result.display.median" :title="'Median'" accent/>
       <formula :display="result.display.mode" :title="'Mode'">
@@ -25,9 +11,10 @@
 
 <script>
 import calc from '../scripts/nonGroup'
+import AutoTable from './AutoTable.vue'
 import Formula from './Formula.vue'
 export default {
-  components: { Formula },
+  components: { Formula, AutoTable },
     props:{
         input:{
             type:Array,
@@ -41,17 +28,17 @@ export default {
     },
 
     computed:{
-        sortedList(){
-            let i = [...this.result.sorted]
-            let x = []
-            while (i.length) x.push(i.splice(0,this.breakPoint))
-            return x
-        },
-
         
         result(){
             return calc(this.input)
         },
+
+        sorted(){
+            return this.result.sorted
+        },
+        boldIndex(){
+            return this.result.medianIndex
+        }
 
         
     },

@@ -1,7 +1,8 @@
 class Des{
     constructor(input){
         this.input = input
-        this.init() 
+        if(input.length) this.init() 
+        return
     }
 
     init(){
@@ -30,8 +31,8 @@ class Des{
 
         for (let i = 0; i < this.cls; i++) {
             let _i_min = i*this.interval+this.input_min
-            let _i_max = _i_min+this.interval-1
-            let fi = this.input.filter(i=>i>=_i_min&&i<=_i_min+this.interval-1).length
+            let _i_max = this.interval!=0?_i_min+this.interval-1:_i_min+this.interval
+            let fi = this.input.filter(i=>i>=_i_min&&i<=_i_max).length
             let xi = (_i_min+_i_max)/2
             let fixi = fi*xi
             table.push({
@@ -67,7 +68,7 @@ class Des{
         this.table = table
 
         this.median = table[hifi_index].min + this.interval * (1/2*_last_fc-this.jf)/table[hifi_index].fi
-        let medianDisplay = ['Median = b+i((frac{1}{2}n-Jf)/f)', `= ${this.b}+${this.interval}((frac{1}{2}${this.fi_sum}-${this.jf})/${this.f[0]})`, `= ${this.b}+${this.interval}(${(.5*this.fi_sum-this.jf)/this.f[0]})`, `= ${this.median}`]
+        let medianDisplay = ['Median = b+i((frac{1}{2}n-Jf)/f)', `= ${this.b}+${this.interval}((frac{1}{2}${this.fi_sum}-${this.jf})/${this.f[0]})`, `= ${this.b}+${this.interval}(${(.5*this.fi_sum-this.jf)/this.f[0]})`, `= ${this.median.toFixed(2)}`]
 
         this.mode = table[hifi_index].min + this.interval * ((this.f[0]-this.f[1])/((this.f[0]-this.f[1])+(this.f[0]-this.f[2])))
         let modeDisplay = ['Mode=b+i((F1)/(F1+F2))', `= ${this.b}+${this.interval}((${this.f[0]}-${this.f[1]})/((${this.f[0]}-${this.f[1]})+(${this.f[0]}-${this.f[2]})))`, `= ${this.b}+${this.interval}(${this.f[0]-this.f[1]}/(${this.f[0]-this.f[1]}+${this.f[0]-this.f[2]}))`, `= ${this.mode.toFixed(2)}`]
@@ -75,8 +76,8 @@ class Des{
         this.sd = Math.sqrt((_last_fc*fixi2_sum-(fixi_sum**2))/(30*(30-1)))
         let sdDisplay = [
             'S = sqrt((n sumFiX\\i^2-(sumFiX\\i)^2)/(n(n-1)))',
-            `= sqrt((${this.fi_sum}${fixi2_sum}-${fixi_sum**2})/(${this.fi_sum}(${this.fi_sum}-1)))`,
-            `= sqrt((${this.fi_sum*fixi2_sum-(fixi_sum**2)})/(${this.fi_sum*(this.fi_sum-1)}))`,
+            `= sqrt((${this.fi_sum * this.fixi2_sum}-${fixi_sum**2})/(${this.fi_sum}(${this.fi_sum}-1)))`,
+            `= sqrt((${(this.fi_sum*this.fixi2_sum)-(fixi_sum**2)})/(${this.fi_sum*(this.fi_sum-1)}))`,
             `= ${this.sd.toFixed(2)}`
         ]
         this.display = {

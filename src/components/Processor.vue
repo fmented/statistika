@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="input.length">
     <formula :display="result.display.range" :title="'Range'" accent/>
     <formula :display="result.display.cls" :title="'Class'"/>
     <formula :display="result.display.interval" :title="'Interval'" accent/>

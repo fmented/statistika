@@ -2,18 +2,19 @@
   <div id="app">
     <header class="nav">
       <h2>
-        Statistika
+        📊Statistika
       </h2> 
     </header>
     <input-box @process="override">
     <div style="text-align:center">
-      <label for="nongroup">Process Non Group</label>
+      <label for="nongroup">Non Group</label>
     <input type="checkbox" name="nongroup" id="nongroup" v-model="nongroup">
     </div>
     </input-box>
     <div v-if="input">
-      <p style="text-align:center">Original: {{input.original}}</p>
-      <p style="text-align:center">Added: {{input.addedVal}}</p>
+        <auto-table :data="input.original" :title="'Original'" accent/>
+        <auto-table :data="input.added" :title="'Added'" />
+      
 
       <processor-non-group  v-if="nongroup" :input="input.added"/>
       <processor  v-else :input="input.added"/>
@@ -28,9 +29,10 @@
 import Processor from './components/Processor.vue'
 import InputBox from './components/InputBox.vue'
 import ProcessorNonGroup from './components/ProcessorNonGroup.vue'
+import AutoTable from './components/AutoTable.vue'
 
 export default {
-  components: { Processor, InputBox, ProcessorNonGroup },
+  components: { Processor, InputBox, ProcessorNonGroup, AutoTable },
   name: 'App',
     
   data(){
@@ -106,6 +108,7 @@ p, h3{
 h3{
   margin-top: 5%;
 }
+
 
 .formula{
     padding-top: 5%;
