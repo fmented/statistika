@@ -93,9 +93,6 @@ padding-top: 5%;
     font-weight: bold;
 }
 
-.base{
-    
-}
 
 textarea{
     height: 10vh;
