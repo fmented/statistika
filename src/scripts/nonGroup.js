@@ -38,7 +38,7 @@ export default function (arr) {
     let display={
         median: medianDisplay,
         avg: avgDisplay,
-        mode: ['Mode = "Most Frequent value"']
+        mode: ['Mode = "Most Frequent value"', (mode.length)?mode.toString():'No Mode']
     }
 
 

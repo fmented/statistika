@@ -91,11 +91,11 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 padding-top: 5%;
-    padding-bottom: 5%
+    padding-bottom: 5%;
 }
 
 .addition-label{
-    margin-top: 12px;
+    margin-top: 24px;
     font-weight: bold;
 }
 
@@ -103,6 +103,7 @@ padding-top: 5%;
 textarea{
     height: 10vh;
     width: 90%;
+    font-size: 1.2em;
 }
 
 .hidden{
@@ -112,6 +113,8 @@ textarea{
 
 #addition{
     margin: 12px;
+    min-width: 90%;
+    font-size: 1em;
 }
 
 

@@ -3,9 +3,7 @@
       <auto-table :data="sorted" :boldIndex="boldIndex" :title="'Sorted'" accent/>
       <formula :display="result.display.avg" :title="'Average'"/>
       <formula :display="result.display.median" :title="'Median'" accent/>
-      <formula :display="result.display.mode" :title="'Mode'">
-          <p>` = {{result.mode.length ? result.mode.toString() : 'No Mode'}}`</p>
-      </formula>
+      <formula :display="result.display.mode" :title="'Mode'"/>
   </div>
 </template>
 
@@ -23,7 +21,6 @@ export default {
 
     data(){
         return {
-            breakPoint : 12
         }
     },
 

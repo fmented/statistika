@@ -122,6 +122,12 @@ h3{
 
 }
 
+#nongroup{
+  min-width: 1.5em;
+  min-height: 1.5em;
+  margin: 16px;
+}
+
 
 
 </style>
